@@ -1,4 +1,6 @@
 import { useTransactions } from "../../hooks/useTransactions";
+import { dateFormatter, priceFormatter } from "../../utils/formatter";
+import { SearchForm } from "../SearchForm";
 import { Container } from "./styles";
 
 export function TransactionsTable() {
@@ -7,6 +9,8 @@ export function TransactionsTable() {
 
   return (
     <Container>
+      <SearchForm />
+
       <table>
         <thead>
           <tr>
@@ -21,15 +25,11 @@ export function TransactionsTable() {
             <tr key={transaction.id}>
               <td>{transaction.title}</td>
               <td className={transaction.type}>
-                {new Intl.NumberFormat('pt-BR', {
-                  style: 'currency',
-                  currency: 'BRL'
-                }).format(transaction.amount)}
+                {transaction.type === "withdraw" && "- "}
+                {priceFormatter.format(transaction.amount)}
               </td>
               <td>{transaction.category}</td>
-              <td>{new Intl.DateTimeFormat('pt-BR').format(
-                new Date(transaction.createdAt)
-              )}</td>
+              <td>{dateFormatter.format(new Date(transaction.createdAt))}</td>
             </tr>
           ))}
         </tbody>

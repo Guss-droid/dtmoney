@@ -1,14 +1,19 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  margin-top: 4rem;
+  margin: 4rem auto 1rem;
+  width: 100%;
+  max-width: 1120px;
+  padding: 0 1.5rem;
   
   table {
     width: 100%;
+    border-collapse: separate;
     border-spacing: 0 0.5rem;
+    margin-top: 1.5rem;
 
     th {
-      color: var(--text-body);
+      color: ${props => props.theme["gray-300"]};
       font-weight: 400;
       padding: 1rem 2rem;
       text-align: left;
@@ -16,23 +21,27 @@ export const Container = styled.div`
     }
 
     td {
-      padding: 1rem 2rem;
+      padding: 1.25rem 2rem;
       border: 0;
-      background: var(--shape);
-      color: var(--text-body);
-      border-radius: 0.25rem;
+      background: ${props => props.theme["gray-700"]};
 
       &:first-child {
-        color: var(--text-title);
+        border-top-left-radius: 6px;
+        border-bottom-left-radius: 6px;
+      }
+
+      &:last-child {
+        border-top-right-radius: 6px;
+        border-bottom-right-radius: 6px;
       }
 
       &.deposit {
-        color: var(--green);
+        color: ${props => props.theme["green-300"]};
       }
 
       &.withdraw {
-        color: var(--red);
-      }
+        color: ${props => props.theme["red-300"]};
+      }      
     }
   }
 `

@@ -3,34 +3,34 @@ import { darken, transparentize } from "polished";
 
 interface IRadioBox {
   isActive: boolean;
-  activeColor: 'greenButton' | 'redButton';
+  activeColor: "greenButton" | "redButton";
 }
 
 const colors = {
-  greenButton: '#33CC95',
-  redButton: '#E52E40'
+  greenButton: "#33CC95",
+  redButton: "#E52E40"
 }
 
 export const Container = styled.form`
   h2 {
-    color: var(--text-title);
+    color: ${props => props.theme["gray-100"]};
     font-size: 1.5rem;
     margin-bottom: 2rem;
-
   }
 
   input {
     width: 100%;
-    padding: 0 1.5rem;
+    padding: 1rem;
     height: 4rem;
-    border: 0.25rem;
-    background: #E7E9EE;
-    border: 1px solid #D7D7D7;
+    border-radius: 6px;
+    background: ${props => props.theme["gray-900"]};
+    color: ${props => props.theme["gray-300"]};
+    border: 0;
     font-weight: 400;
     font-size: 1rem;
 
     &::placeholder {
-      color: var(--text-body);
+      color: ${props => props.theme["gray-500"]}
     }
 
     & + input {
@@ -40,16 +40,14 @@ export const Container = styled.form`
 
   button[type="submit"] {
     width: 100%;
-    height: 4rem;
-    padding: 0 1.5rem;
-    background: var(--green);
-    color: #FFF;
-    border-radius: 0.25rem;
+    height: 3.5rem;
+    padding: 0 1.25rem;
+    background: ${props => props.theme["green-500"]};
+    color: ${props => props.theme.white};
+    border-radius: 6px;
     border: 0;
-    font-size: 1rem;
     margin-top: 1.5rem;
-    font-weight: 600;
-
+    font-weight: bold;
     transition: filter 0.2s;
 
     &:hover {
@@ -66,16 +64,16 @@ export const TransactionTypeContainer = styled.div`
 `
 
 export const RadioBox = styled.button<IRadioBox>`
-    height: 4rem;
-    border: 1px solid #D7D7D7;
-    border-radius: 0.25rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background: ${(props) => props.isActive ?
+  height: 4rem;
+  border: 0;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: ${(props) => props.isActive ?
     transparentize(0.8, colors[props.activeColor])
-    : 'transparent'};
+    : props.theme["gray-700"]};
+  transition: border-color 0.2s;
 
     img {
       width: 20px;
@@ -86,12 +84,15 @@ export const RadioBox = styled.button<IRadioBox>`
       display: inline-block;
       margin-left: 1rem;
       font-size: 1rem;
-      color: var(--text-title);
+      color: ${props => props.theme["gray-100"]};
     }
 
-    transition: border-color 0.2s;
 
     &:hover {
-      border-color: ${darken(0.1, '#D7D7D7')};
+      border-color: ${darken(0.1, "#D7D7D7")};
     }
+`
+
+export const ModalContainer = styled.div`
+  background: ${props => props.theme["gray-800"]};
 `

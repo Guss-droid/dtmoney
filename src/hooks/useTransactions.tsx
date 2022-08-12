@@ -23,26 +23,26 @@ interface ITransactionsContextData {
   createTransaction: (transaction: TransactionInputProps) => Promise<void>
 }
 
-type TransactionInputProps = Omit<ITransactions, 'id' | 'createdAt'>
+type TransactionInputProps = Omit<ITransactions, "id" | "createdAt">
 
 const TransactionsContext = createContext({} as ITransactionsContextData)
 
 export function TransactionProvider({ children }: ITransactionProvider) {
-  const [transactionsData, setTrasactions] = useState<ITransactions[]>([])
+  const [transactionsData, setTransactions] = useState<ITransactions[]>([])
 
   useEffect(() => {
-    api.get<TransactionResponse>('transaction')
-      .then(res => setTrasactions(res.data.transactions))
+    api.get<TransactionResponse>("transaction")
+      .then(res => setTransactions(res.data.transactions))
   }, [])
 
   async function createTransaction(transactionInput: TransactionInputProps) {
-    const res = await api.post('/transaction', {
+    const res = await api.post("/transaction", {
       ...transactionInput,
       createdAt: new Date(),
     })
     const { transactions } = res.data
 
-    setTrasactions([
+    setTransactions([
       ...transactionsData,
       transactions
     ])

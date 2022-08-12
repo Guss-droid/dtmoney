@@ -1,12 +1,12 @@
-import { FormEvent, useState } from 'react';
-import { useTransactions } from '../../hooks/useTransactions';
-import Modal from 'react-modal'
+import { FormEvent, useState } from "react";
+import { useTransactions } from "../../hooks/useTransactions";
+import Modal from "react-modal"
 
-import closeimg from '../../assets/close.svg'
-import incomeimg from '../../assets/income.svg'
-import outcomeimg from '../../assets/outcome.svg'
+import closeImg from "../../assets/close.svg"
+import incomeImg from "../../assets/income.svg"
+import outcomeImg from "../../assets/outcome.svg"
 
-import { Container, RadioBox, TransactionTypeContainer } from './styles';
+import { Container, RadioBox, TransactionTypeContainer } from "./styles";
 
 interface IModalTransaction {
   isOpen: boolean;
@@ -17,25 +17,25 @@ export function NewTransactionModal({ isOpen, onRequestClose }: IModalTransactio
 
   const { createTransaction } = useTransactions()
 
-  const [buttonTypeSelected, setButtonTypeSelected] = useState('deposit')
-  const [title, setTitle] = useState('')
+  const [buttonTypeSelected, setButtonTypeSelected] = useState("deposit")
+  const [title, setTitle] = useState("")
   const [value, setValue] = useState(0)
-  const [category, setCategory] = useState('')
+  const [category, setCategory] = useState("")
 
   async function handleCreateTransaction(e: FormEvent) {
     e.preventDefault()
 
-   await createTransaction({
+    await createTransaction({
       title,
       amount: value,
       category,
       type: buttonTypeSelected,
     })
 
-    setTitle('')
+    setTitle("")
     setValue(0)
-    setCategory('')
-    setButtonTypeSelected('deposit')
+    setCategory("")
+    setButtonTypeSelected("deposit")
     onRequestClose()
   }
 
@@ -51,7 +51,7 @@ export function NewTransactionModal({ isOpen, onRequestClose }: IModalTransactio
         onClick={onRequestClose}
         className="react-modal-close"
       >
-        <img src={closeimg} alt="Fechar o modal" />
+        <img src={closeImg} alt="Fechar o modal" />
       </button>
 
       <Container onSubmit={handleCreateTransaction}>
@@ -75,21 +75,21 @@ export function NewTransactionModal({ isOpen, onRequestClose }: IModalTransactio
 
           <RadioBox
             type="button"
-            onClick={() => setButtonTypeSelected('deposit')}
-            isActive={buttonTypeSelected === 'deposit'}
+            onClick={() => setButtonTypeSelected("deposit")}
+            isActive={buttonTypeSelected === "deposit"}
             activeColor="greenButton"
           >
-            <img src={incomeimg} alt="Entrada" />
+            <img src={incomeImg} alt="Entrada" />
             <span>Entrada</span>
           </RadioBox>
 
           <RadioBox
             type="button"
-            onClick={() => setButtonTypeSelected('withdraw')}
-            isActive={buttonTypeSelected === 'withdraw'}
+            onClick={() => setButtonTypeSelected("withdraw")}
+            isActive={buttonTypeSelected === "withdraw"}
             activeColor="redButton"
           >
-            <img src={outcomeimg} alt="Saída" />
+            <img src={outcomeImg} alt="Saída" />
             <span>Saída</span>
           </RadioBox>
 

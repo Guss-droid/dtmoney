@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { TransactionProvider } from "./hooks/useTransactions";
 
-import { Dashboard } from "./components/Dashboard";
+import Modal from "react-modal";
+
 import { Header } from "./components/Header";
+import { Dashboard } from "./components/Dashboard";
 import { NewTransactionModal } from "./components/NewTransactionModal";
 
-import Modal from 'react-modal'
 
-Modal.setAppElement('#root')
+Modal.setAppElement("#root")
 
 export function App() {
 

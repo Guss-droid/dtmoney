@@ -1,20 +1,18 @@
 import { useTransactions } from "../../hooks/useTransactions";
 
-import incomeimg from '../../assets/income.svg'
-import outcomeimg from '../../assets/outcome.svg'
-import totalimg from '../../assets/total.svg'
+import incomeImg from "../../assets/income.svg"
+import outcomeImg from "../../assets/outcome.svg"
+import totalImg from "../../assets/total.svg"
 
 import { Container } from "./styles";
+import { priceFormatter } from "../../utils/formatter";
 
 export function Summary() {
 
   const { transactionsData } = useTransactions()
 
-  console.log(transactionsData)
-
   const summary = transactionsData.reduce((acc, transaction) => {
-
-    if (transaction.type === 'deposit') {
+    if (transaction.type === "deposit") {
       acc.deposit += transaction.amount
       acc.total += transaction.amount
     } else {
@@ -34,37 +32,31 @@ export function Summary() {
       <div>
         <header>
           <p>Entradas</p>
-          <img src={incomeimg} alt="Income logo" />
+          <img src={incomeImg} alt="Income logo" />
         </header>
+
         <strong>
-          {new Intl.NumberFormat('pt-BR', {
-            style: 'currency',
-            currency: 'BRL'
-          }).format(summary.deposit)}
+          {priceFormatter.format(summary.deposit)}
         </strong>
       </div>
+
       <div>
         <header>
           <p>Saídas</p>
-          <img src={outcomeimg} alt="Outcome logo" />
+          <img src={outcomeImg} alt="Outcome logo" />
         </header>
-        <strong>- 
-          {new Intl.NumberFormat('pt-BR', {
-            style: 'currency',
-            currency: 'BRL'
-          }).format(summary.withdraw)}
+        <strong>- {" "} 
+          {priceFormatter.format(summary.withdraw)}
         </strong>
       </div>
+      
       <div className="total">
         <header>
           <p>Total</p>
-          <img src={totalimg} alt="Total logo" />
+          <img src={totalImg} alt="Total logo" />
         </header>
         <strong>
-          {new Intl.NumberFormat('pt-BR', {
-            style: 'currency',
-            currency: 'BRL'
-          }).format(summary.total)}
+          {priceFormatter.format(summary.total)}
         </strong>
       </div>
     </Container>
